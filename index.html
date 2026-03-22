@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爆速！書類メーカー Pro Max</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="main-container">
+        <div id="input-section">
+            <header>
+                <h1>爆速！書類メーカー Pro</h1>
+                <p class="subtitle">インボイス制度・源泉徴収・電子印影に完全対応</p>
+                <div class="pr-badge">【PR】</div>
+            </header>
+
+            <div id="error-message" class="error-box" style="display: none;"></div>
+
+            <div class="ad-container">
+                <a href="あなたのASPリンク" target="_blank" class="ad-banner-link">
+                    <span class="ad-chip">PR</span> 確定申告の工数を9割削減する方法 →
+                </a>
+            </div>
+
+            <div class="form-group">
+                <label>作成する書類</label>
+                <div class="tab-container">
+                    <input type="radio" name="docType" value="見積書" id="type1" checked onclick="updateUI()">
+                    <label for="type1" class="tab-item">見積書</label>
+                    <input type="radio" name="docType" value="納品書" id="type2" onclick="updateUI()">
+                    <label for="type2" class="tab-item">納品書</label>
+                    <input type="radio" name="docType" value="請求書" id="type3" onclick="updateUI()">
+                    <label for="type3" class="tab-item">請求書</label>
+                    <div class="tab-bg"></div>
+                </div>
+            </div>
+
+            <div class="section-title">基本設定</div>
+            <div class="form-row">
+                <div class="form-group" style="flex:1.2;">
+                    <label>書類番号</label>
+                    <input type="text" id="docNumber" placeholder="No.2026-001" oninput="updatePreview()">
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>発行日</label>
+                    <input type="date" id="issueDate" oninput="updatePreview()">
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label id="expiryLabel">有効期限</label>
+                    <input type="date" id="expiryDate" oninput="updatePreview()">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group" style="flex:1;">
+                    <label>ロゴ画像 (左上)</label>
+                    <input type="file" accept="image/*" onchange="handleFile(this, 'logo')">
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>印影・判子</label>
+                    <input type="file" accept="image/*" onchange="handleFile(this, 'seal')">
+                </div>
+            </div>
+
+            <div class="section-title">宛先・件名</div>
+            <div class="form-group">
+                <label>取引先名 <span class="required">必須</span></label>
+                <input type="text" id="clientName" placeholder="〇〇株式会社 御中" oninput="updatePreview()">
+            </div>
+            <div class="form-group">
+                <label>件名</label>
+                <input type="text" id="subject" placeholder="案件名を入力" oninput="updatePreview()">
+            </div>
+
+            <div class="section-title">明細内容</div>
+            <div id="items-container"></div>
+            <button class="secondary-btn" onclick="addItemRow()">+ 行を追加</button>
+
+            <div class="section-title">発行者（あなた）の情報</div>
+            <div class="form-group">
+                <label>氏名または屋号 <span class="required">必須</span></label>
+                <input type="text" id="issuerName" placeholder="山田 太郎" oninput="updatePreview()">
+            </div>
+            <div class="form-group">
+                <label>住所</label>
+                <input type="text" id="issuerAddress" placeholder="東京都〇〇区〇〇" oninput="updatePreview()">
+            </div>
+            <div class="form-row">
+                <div class="form-group" style="flex:1;">
+                    <label>電話番号</label>
+                    <input type="text" id="issuerTel" placeholder="090-0000-0000" oninput="handleTelInput(this)">
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>登録番号</label>
+                    <div class="t-input-group">
+                        <span class="t-prefix">T</span>
+                        <input type="text" id="invoiceId" placeholder="13桁" maxlength="13" oninput="handleNumberInput(this)">
+                    </div>
+                </div>
+            </div>
+
+            <div id="bank-info-area" style="display: none;">
+                <div class="section-title">お振込先</div>
+                <div class="form-row">
+                    <input type="text" id="bankName" placeholder="〇〇銀行" list="bank-list" style="flex:1.2;" oninput="updatePreview()">
+                    <datalist id="bank-list">
+                        <option value="三菱UFJ銀行"><option value="三井住友銀行"><option value="みずほ銀行"><option value="楽天銀行"><option value="PayPay銀行">
+                    </datalist>
+                    <div class="suffix-input" style="flex:1;">
+                        <input type="text" id="branchName" placeholder="〇〇" oninput="updatePreview()">
+                        <span class="suffix-text">支店</span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <select id="accountType" style="flex:1;" onchange="updatePreview()">
+                        <option value="普通">普通</option><option value="当座">当座</option>
+                    </select>
+                    <input type="text" id="accountNumber" placeholder="口座番号(7桁)" maxlength="7" style="flex:2;" oninput="handleNumberInput(this)">
+                </div>
+                <input type="text" id="accountHolder" placeholder="口座名義 (カタカナ)">
+            </div>
+
+            <div class="section-title">その他設定</div>
+            <div class="form-group withholding-box">
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="withholding" onchange="updatePreview()">
+                    <span class="checkbox-text">源泉徴収（10.21%）を計算に含める</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>備考</label>
+                <textarea id="remarks" rows="3" placeholder="今月も大変お世話になりました。"></textarea>
+            </div>
+
+            <button class="primary-btn" onclick="handleExport()">PDFを生成して保存（待機10秒）</button>
+
+            <div class="affiliate-card">
+                <p class="ad-tag-small">PR</p>
+                <p class="ad-title">フリーランスの節税対策</p>
+                <a href="あなたのASPリンク" target="_blank" class="ad-button">月額無料の会計ソフトを試す</a>
+            </div>
+        </div>
+
+        <div id="preview-section">
+            <div id="preview-wrapper">
+                <div id="pdf-content"></div>
+            </div>
+        </div>
+
+        <div id="ad-overlay">
+            <div class="ad-modal">
+                <div class="ad-content">
+                    <h3 id="ad-status">高品質なPDFを出力しています...</h3>
+                    <div class="loader-container"><div class="loader-bar"></div></div>
+                    <div id="timer">10</div>
+                    <div class="featured-ad-box">
+                        <p class="featured-text">待ち時間におすすめのツールをチェック</p>
+                        <a href="あなたのASPリンク" target="_blank" class="cta-button">【PR】確定申告が1分で終わる無料ソフト</a>
+                        <p class="timer-desc">※10秒経過後に自動的にダウンロードが始まります</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
