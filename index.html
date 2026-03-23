@@ -15,10 +15,17 @@
                 <div class="pr-badge">【PR】</div>
             </header>
 
-            <div class="ad-container">
-                <a href="あなたのASPリンク" target="_blank" class="ad-banner-link">
-                    <span class="ad-chip">PR</span> 確定申告の工数を9割削減する方法 →
-                </a>
+            <div class="ad-section">
+                <div class="ad-pc ad-banner-full">
+                    <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSJ+4784FM+3SPO+C8LMIP" rel="nofollow" target="_blank">
+                    <img border="0" width="468" height="60" alt="" src="https://www28.a8.net/svt/bgt?aid=260322067254&wid=001&eno=01&mid=s00000017718074004000&mc=1"></a>
+                    <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=4AZLSJ+4784FM+3SPO+C8LMIP" alt="">
+                </div>
+                <div class="ad-sp ad-banner-full">
+                    <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSJ+4784FM+3SPO+C8LMIP" rel="nofollow" target="_blank">
+                    <img border="0" width="468" height="60" alt="" src="https://www28.a8.net/svt/bgt?aid=260322067254&wid=001&eno=01&mid=s00000017718074004000&mc=1"></a>
+                    <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=4AZLSJ+4784FM+3SPO+C8LMIP" alt="">
+                </div>
             </div>
 
             <div class="form-group">
@@ -38,37 +45,42 @@
             <div class="form-row">
                 <div class="form-group" style="flex:1.2;">
                     <label>書類番号</label>
-                    <input type="text" id="docNumber" placeholder="No.2026-001" oninput="updatePreview()">
+                    <input type="text" id="docNumber" name="docNumber" placeholder="No.2026-001" oninput="updatePreview()">
                 </div>
                 <div class="form-group" style="flex:1;">
                     <label>発行日</label>
-                    <input type="date" id="issueDate" oninput="updatePreview()">
+                    <input type="date" id="issueDate" name="issueDate" max="9999-12-31" oninput="updatePreview()">
                 </div>
                 <div class="form-group" style="flex:1;">
                     <label id="expiryLabel">有効期限</label>
-                    <input type="date" id="expiryDate" oninput="updatePreview()">
+                    <input type="date" id="expiryDate" name="expiryDate" max="9999-12-31" oninput="updatePreview()">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group" style="flex:1;">
                     <label>ロゴ画像</label>
-                    <input type="file" accept="image/*" onchange="handleFile(this, 'logo')">
+                    <input type="file" accept="image/*" name="logoFile" onchange="handleFile(this, 'logo')">
                 </div>
                 <div class="form-group" style="flex:1;">
                     <label>印影・判子</label>
-                    <input type="file" accept="image/*" onchange="handleFile(this, 'seal')">
+                    <input type="file" accept="image/*" name="sealFile" onchange="handleFile(this, 'seal')">
                 </div>
+            </div>
+
+            <div class="ad-section">
+                <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSI+5VCWJ6+50+2I1T8Y" rel="nofollow" target="_blank" class="ad-btn-text">お名前.comで独自ドメインを取得する</a>
+                <img border="0" width="1" height="1" src="https://www14.a8.net/0.gif?a8mat=4AZLSI+5VCWJ6+50+2I1T8Y" alt="">
             </div>
 
             <div class="section-title">宛先・件名</div>
             <div class="form-group">
                 <label>取引先名 <span class="required">必須</span></label>
-                <input type="text" id="clientName" placeholder="〇〇株式会社 御中" oninput="updatePreview()">
+                <input type="text" id="clientName" name="clientName" placeholder="〇〇株式会社 御中" oninput="updatePreview()">
             </div>
             <div class="form-group">
                 <label>件名</label>
-                <input type="text" id="subject" placeholder="案件名を入力" oninput="updatePreview()">
+                <input type="text" id="subject" name="subject" placeholder="案件名を入力" oninput="updatePreview()">
             </div>
 
             <div class="section-title">明細内容</div>
@@ -78,22 +90,22 @@
             <div class="section-title">発行者（あなた）の情報</div>
             <div class="form-group">
                 <label>氏名または屋号 <span class="required">必須</span></label>
-                <input type="text" id="issuerName" placeholder="山田 太郎" oninput="updatePreview()">
+                <input type="text" id="issuerName" name="issuerName" placeholder="山田 太郎" oninput="updatePreview()">
             </div>
             <div class="form-group">
                 <label>住所</label>
-                <input type="text" id="issuerAddress" placeholder="東京都〇〇区〇〇" oninput="updatePreview()">
+                <input type="text" id="issuerAddress" name="issuerAddress" placeholder="東京都〇〇区〇〇" oninput="updatePreview()">
             </div>
             <div class="form-row">
                 <div class="form-group" style="flex:1;">
                     <label>電話番号</label>
-                    <input type="text" id="issuerTel" placeholder="090-0000-0000" oninput="handleTelInput(this)">
+                    <input type="text" id="issuerTel" name="issuerTel" placeholder="090-0000-0000" oninput="handleTelInput(this)">
                 </div>
                 <div class="form-group" style="flex:1;">
                     <label>登録番号</label>
                     <div class="t-input-group">
                         <span class="t-prefix">T</span>
-                        <input type="text" id="invoiceId" placeholder="13桁" maxlength="13" oninput="handleNumberInput(this)">
+                        <input type="text" id="invoiceId" name="invoiceId" placeholder="13桁" maxlength="13" oninput="handleNumberInput(this)">
                     </div>
                 </div>
             </div>
@@ -101,37 +113,38 @@
             <div id="bank-info-area" style="display: none;">
                 <div class="section-title">お振込先</div>
                 <div class="form-row">
-                    <input type="text" id="bankName" placeholder="〇〇銀行" list="bank-list" style="flex:1.2;" oninput="updatePreview()">
+                    <input type="text" id="bankName" name="bankName" placeholder="〇〇銀行" list="bank-list" style="flex:1.2;" oninput="updatePreview()">
                     <datalist id="bank-list">
                         <option value="三菱UFJ銀行"><option value="三井住友銀行"><option value="みずほ銀行"><option value="楽天銀行"><option value="PayPay銀行">
                     </datalist>
-                    <div class="suffix-input" style="flex:1;">
-                        <input type="text" id="branchName" placeholder="支店名" oninput="updatePreview()">
+                    <div style="flex:1; display:flex;">
+                        <input type="text" id="branchName" name="branchName" placeholder="〇〇" oninput="updatePreview()" style="flex:1; border-radius:8px 0 0 8px;">
+                        <span style="padding:0 10px; background:#eee; border:1px solid var(--border); border-left:none; border-radius:0 8px 8px 0; display:flex; align-items:center; font-size:14px; color:#555;">支店</span>
                     </div>
                 </div>
                 <div class="form-row">
-                    <select id="accountType" style="flex:1;" onchange="updatePreview()">
+                    <select id="accountType" name="accountType" style="flex:1;" onchange="updatePreview()">
                         <option value="普通">普通</option><option value="当座">当座</option>
                     </select>
-                    <input type="text" id="accountNumber" placeholder="口座番号(7桁)" maxlength="7" style="flex:2;" oninput="handleNumberInput(this)">
+                    <input type="text" id="accountNumber" name="accountNumber" placeholder="口座番号(7桁)" maxlength="7" style="flex:2;" oninput="handleNumberInput(this)">
                 </div>
-                <input type="text" id="accountHolder" placeholder="口座名義 (カタカナ)" style="margin-top:10px;">
+                <input type="text" id="accountHolder" name="accountHolder" placeholder="口座名義 (カタカナ)" style="margin-top:10px;" onblur="handleHolderConvert(this); updatePreview()">
             </div>
 
             <div class="section-title">その他設定</div>
             <div class="form-group withholding-box">
-                <label class="checkbox-wrapper">
-                    <input type="checkbox" id="withholding" onchange="updatePreview()">
+                <label class="checkbox-wrapper" style="display:flex; align-items:center; cursor:pointer;">
+                    <input type="checkbox" id="withholding" name="withholding" onchange="updatePreview()" style="width:auto; margin-right:8px;">
                     <span class="checkbox-text">源泉徴収（10.21%）を含める</span>
                 </label>
             </div>
             <div class="form-group">
                 <label>備考</label>
-                <textarea id="remarks" rows="3" placeholder="今月も大変お世話になりました。"></textarea>
+                <textarea id="remarks" name="remarks" rows="3" placeholder="今月も大変お世話になりました。"></textarea>
             </div>
             <div class="form-group">
                 <label>通貨</label>
-                <select id="currency" onchange="updatePreview()">
+                <select id="currency" name="currency" onchange="updatePreview()">
                     <option value="JPY">日本円 (¥)</option><option value="USD">USドル ($)</option><option value="EUR">ユーロ (€)</option>
                 </select>
             </div>
@@ -139,9 +152,17 @@
             <button class="primary-btn" onclick="handleExport()">PDFを生成して保存（待機10秒）</button>
 
             <div class="affiliate-card">
-                <p class="ad-tag-small">PR</p>
-                <p class="ad-title">フリーランスの節税対策</p>
-                <a href="あなたのASPリンク" target="_blank" class="ad-button">月額無料の会計ソフトを試す</a>
+                <p class="ad-tag-small">PR: フリーランスの節税対策</p>
+                <div class="ad-pc ad-banner-rect" style="margin-top:10px;">
+                    <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSJ+47TK1E+35XE+65EOH" rel="nofollow" target="_blank">
+                    <img border="0" width="300" height="250" alt="" src="https://www28.a8.net/svt/bgt?aid=260322067255&wid=001&eno=01&mid=s00000014765001033000&mc=1"></a>
+                    <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=4AZLSJ+47TK1E+35XE+65EOH" alt="">
+                </div>
+                <div class="ad-sp ad-banner-rect" style="margin-top:10px;">
+                    <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSJ+47TK1E+35XE+65EOH" rel="nofollow" target="_blank">
+                    <img border="0" width="300" height="250" alt="" src="https://www28.a8.net/svt/bgt?aid=260322067255&wid=001&eno=01&mid=s00000014765001033000&mc=1"></a>
+                    <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=4AZLSJ+47TK1E+35XE+65EOH" alt="">
+                </div>
             </div>
         </div>
 
@@ -157,9 +178,13 @@
                     <h3>高品質なPDFを出力中...</h3>
                     <div class="loader-container"><div class="loader-bar"></div></div>
                     <div id="timer">10</div>
-                    <div class="featured-ad-box">
-                        <p class="featured-text">待ち時間におすすめのツール</p>
-                        <a href="あなたのASPリンク" target="_blank" class="cta-button">【PR】確定申告が1分で終わる無料ソフト</a>
+                    <div class="featured-ad-box" style="margin-top:20px;">
+                        <p class="featured-text" style="font-size:12px; color:#666; margin-bottom:10px;">待ち時間におすすめ</p>
+                        <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSI+5U61BM+1WP2+6F9M9" rel="nofollow" target="_blank">
+                        <img border="0" width="165" height="120" alt="" src="https://www23.a8.net/svt/bgt?aid=260322066353&wid=001&eno=01&mid=s00000008903001079000&mc=1" class="modal-ad-img"></a>
+                        <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=4AZLSI+5U61BM+1WP2+6F9M9" alt="">
+                        <br>
+                        <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSI+5U61BM+1WP2+6F9M9" target="_blank" class="cta-button">【PR】DMM FXで資産運用を開始</a>
                     </div>
                 </div>
             </div>
