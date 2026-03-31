@@ -2,14 +2,11 @@ let imgData = { logo: '', seal: '' };
 let rowCount = 0;
 
 window.onload = () => {
-    loadData(); // ページ読み込み時にローカルストレージからデータを復元
-    
-    // その他の初期化リスナー
+    loadData();
     document.getElementById('remarks').addEventListener('input', updatePreview);
     setTimeout(updatePreview, 500);
 };
 
-// 修正：自動保存機能（入力内容をブラウザに保存）
 function saveData() {
     try {
         const data = {
@@ -35,7 +32,6 @@ function saveData() {
             items: []
         };
 
-        // 明細の保存
         document.querySelectorAll('.item-row').forEach(row => {
             const cb = row.querySelector('input[type="checkbox"]');
             data.items.push({
@@ -54,19 +50,16 @@ function saveData() {
     }
 }
 
-// 修正：保存データの読み込みと復元
 function loadData() {
     const saved = localStorage.getItem('docMakerProData');
     if (saved) {
         try {
             const data = JSON.parse(saved);
             
-            // ラジオボタンの復元
             if (data.docType) {
                 document.querySelector(`input[name="docType"][value="${data.docType}"]`).checked = true;
             }
             
-            // テキスト等の復元
             const fields = ['docNumber', 'issueDate', 'expiryDate', 'clientName', 'subject', 'issuerName', 'issuerAddress', 'issuerTel', 'invoiceId', 'bankName', 'branchName', 'accountType', 'accountNumber', 'accountHolder', 'remarks', 'currency'];
             fields.forEach(id => {
                 if (data[id] !== undefined && document.getElementById(id)) {
@@ -74,7 +67,6 @@ function loadData() {
                 }
             });
 
-            // チェックボックス・画像の復元
             if (data.withholding !== undefined) {
                 document.getElementById('withholding').checked = data.withholding;
             }
@@ -82,7 +74,6 @@ function loadData() {
                 imgData = data.imgData;
             }
 
-            // 明細の復元
             if (data.items && data.items.length > 0) {
                 document.getElementById('items-container').innerHTML = ''; 
                 data.items.forEach(item => addItemRow(item));
@@ -149,12 +140,10 @@ function handleTelInput(el) {
 
 function handleHolderConvert(el) {
     let val = el.value;
-    // 修正：入力完了時（フォーカスが外れた時）にひらがなをカタカナへ一括変換
     val = val.replace(/[\u3041-\u3096]/g, (m) => String.fromCharCode(m.charCodeAt(0) + 0x60));
     el.value = val.toUpperCase();
 }
 
-// 修正：引数(initData)を受け取り、復元データがあれば初期値として挿入するよう改良
 function addItemRow(initData = null) {
     rowCount++;
     const container = document.getElementById('items-container');
@@ -306,8 +295,6 @@ function updatePreview() {
             ${rem ? `<div style="margin-top:10px; font-size:9px; color:#555;"><p style="font-weight:bold;">【備考】</p><p style="white-space:pre-wrap;">${rem}</p></div>` : ""}
         </div>`;
     adjustScale();
-    
-    // 修正：プレビューが更新されるタイミング（つまり何か入力された時）に自動保存を実行
     saveData();
 }
 
